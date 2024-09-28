@@ -1,12 +1,19 @@
 let jukebox = document.querySelector("ul.player");
+
 jukebox.addEventListener('click', (e) => {
-  let audioPlayer = document.createElement("audio")
-  let songName = e.target.getAttribute("data-src")
+  let audioPlayer = document.createElement("audio");
+  let songName = e.target.getAttribute("data-src");
   audioPlayer.id = "player";
-  e.target.id = "playing"
+  e.target.id = "playing";
   audioPlayer.src = songName;
-  document.body.appendChild(audioPlayer);
-  audioPlayer.play();
+  document.body.appendChild(audioPlayer)
+  audioPlayer.play()
+
+
+  audioPlayer.addEventListener('ended', () => {
+    audioPlayer.parentNode.removeChild(audioPlayer);
+    e.target.id = ''
+  })
 })
 
 
