@@ -4,14 +4,24 @@ jukebox.addEventListener('click', (e) => {
   let songPlaying = document.querySelector('#player');
 
   if (songPlaying) {
-    if (songPlaying.paused) {
-      songPlaying.play();
-      e.target.id = 'playing';
+    if (songName === songPlaying.getAttribute('src')) {
+
+      if (songPlaying.paused) {
+        songPlaying.play();
+        e.target.id = 'playing';
+      } else {
+        songPlaying.pause();
+        e.target.id = 'paused';
+      }
     } else {
-      songPlaying.pause();
-      e.target.id = 'paused';
+
+      songPlaying.src = songName;
+      songPlaying.play();
+      document.querySelector('[id="playing"]')?.removeAttribute('id');
+      e.target.id = 'playing';
     }
   } else {
+
     let audioPlayer = document.createElement('audio');
     audioPlayer.id = 'player';
     e.target.id = 'playing';
